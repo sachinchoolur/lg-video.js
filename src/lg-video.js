@@ -60,7 +60,8 @@ Video.prototype.init = function() {
             // check already video element present
             if (!utils.hasClass($el, 'lg-has-video')) {
 
-                utils.addClass($el, 'lg-video-playing lg-has-video');
+                utils.addClass($el, 'lg-video-playing');
+                utils.addClass($el, 'lg-has-video');
 
                 var _src;
                 var _html;

@@ -1,5 +1,5 @@
 /**!
- * lg-video.js | 0.0.1 | August 1st 2016
+ * lg-video.js | 0.0.2 | August 5th 2016
  * http://sachinchoolur.github.io/lg-video.js
  * Copyright (c) 2016 Sachin N; 
  * @license Apache 2.0 
@@ -95,7 +95,8 @@
                 // check already video element present
                 if (!utils.hasClass($el, 'lg-has-video')) {
 
-                    utils.addClass($el, 'lg-video-playing lg-has-video');
+                    utils.addClass($el, 'lg-video-playing');
+                    utils.addClass($el, 'lg-has-video');
 
                     var _src;
                     var _html;
