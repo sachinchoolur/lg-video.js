@@ -1,6 +1,6 @@
 {
   "name": "lg-video.js",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Video module for lightgallery.",
   "main": [
       "dist/lg-video.min.js"
@@ -20,7 +20,7 @@
       "type": "git",
       "url": "git://github.com/sachinchoolur/lg-video.js.git"
   },
-  "license": "Apache-2.0",
+  "license": "GPLv3",
   "ignore": [
       "README.md"
   ]

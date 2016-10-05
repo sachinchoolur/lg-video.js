@@ -71,11 +71,13 @@ Docs
 -----
 [Options](http://sachinchoolur.github.io/lightgallery.js/docs/api.html#lg-video)
 
-Support
-----
-Use GitHub [issue tracker](https://github.com/sachinchoolur/lg-video.js/issues/new) in the event that you have come across a bug or glitch. It would also be very helpful if you could add a jsFiddle, which would allow you to demonstrate the problem in question.
+License
+---
 
-Use [stackoverflow](https://stackoverflow.com/search?q=lightgallery) instead of github issue tracker if you need any help with implementing lightgallery in your project or if you have any personal support requests. 
+#### Commercial license
+If you want to use lightgallery.js to develop commercial sites, themes, projects, and applications, the Commercial license is the appropriate license. With this option, your source code is kept proprietary. Purchase a lightgallery.js Commercial License at [uplabs.com/posts/lightgallery-js](https://www.uplabs.com/posts/lightgallery-js)
 
-Follow me on twitter [@sachinchoolur](https://twitter.com/sachinchoolur) for the latest news, updates about this project.
+#### Open source license
+
+If you are creating an open source application under a license compatible with the GNU GPL license v3, you may use this project under the terms of the GPLv3.
 
