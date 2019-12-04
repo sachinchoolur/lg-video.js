@@ -280,7 +280,7 @@ Video.prototype.loadVideo = function(src, addClass, noposter, index, html) {
             a = a + '&' + utils.param(this.core.s.vkPlayerParams);
         }
 
-        video = '<iframe class="lg-video-object lg-vk ' + addClass + '" width="560" height="315" src="http://vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+        video = '<iframe class="lg-video-object lg-vk ' + addClass + '" width="560" height="315" src="//vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
 
     }
 
