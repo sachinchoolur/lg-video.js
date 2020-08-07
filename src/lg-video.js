@@ -245,8 +245,8 @@ Video.prototype.loadVideo = function(src, addClass, noposter, index, html) {
     } else {
         videoTitle = this.core.items[index].getAttribute('title');
     }
-
-    var firstImage = this.core.items[index].querySelector('img');
+    
+    var firstImage = this.core.items[index].querySelector ? this.core.items[index].querySelector('img') : undefined;
 
     if (firstImage) {
         videoTitle = videoTitle || firstImage.getAttribute('alt');
