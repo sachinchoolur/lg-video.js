@@ -244,13 +244,14 @@ Video.prototype.loadVideo = function(src, addClass, noposter, index, html) {
         videoTitle = this.core.s.dynamicEl[index].title;
     } else {
         videoTitle = this.core.items[index].getAttribute('title');
+        if(!videoTitle) {
+            var firstImage = this.core.items[index].querySelector('img');
+            if (firstImage) {
+                videoTitle = firstImage.getAttribute('alt');
+            }
+        }
     }
 
-    var firstImage = this.core.items[index].querySelector('img');
-
-    if (firstImage) {
-        videoTitle = videoTitle || firstImage.getAttribute('alt');
-    }
 
     videoTitle = videoTitle ? 'title="' + videoTitle + '"' : '';
 
