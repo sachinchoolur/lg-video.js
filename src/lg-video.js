@@ -37,7 +37,7 @@ Video.prototype.init = function() {
                         }
                     });
                 } catch (e) {
-                    console.error('Make sure you have included videojs');
+                    console.error('lightGallery:- Make sure you have included videojs');
                 }
             } else {
                 _this.core.___slide[event.detail.index].querySelector('.lg-html5').play();
@@ -76,7 +76,7 @@ Video.prototype.init = function() {
                                     this.play();
                                 });
                             } catch (e) {
-                                console.error('Make sure you have included videojs');
+                                console.error('lightGallery:- Make sure you have included videojs');
                             }
                         } else {
                             _this.core.___slide[_this.core.index].querySelector('.lg-html5').play();
@@ -137,7 +137,7 @@ Video.prototype.init = function() {
                         try {
                             videojs(html5Player).play();
                         } catch (e) {
-                            console.error('Make sure you have included videojs');
+                            console.error('lightGallery:- Make sure you have included videojs');
                         }
                     } else {
                         html5Player.play();
@@ -195,7 +195,7 @@ Video.prototype.init = function() {
                 try {
                     videojs(html5Player).pause();
                 } catch (e) {
-                    console.error('Make sure you have included videojs');
+                    console.error('lightGallery:- Make sure you have included videojs');
                 }
             } else {
                 html5Player.pause();
