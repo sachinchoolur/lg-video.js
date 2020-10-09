@@ -1,5 +1,5 @@
 /**!
- * lg-video.js | 1.2.1 | September 15th 2020
+ * lg-video.js | 1.3.0-beta.0 | October 9th 2020
  * http://sachinchoolur.github.io/lg-video.js
  * Copyright (c) 2016 Sachin N; 
  * @license GPLv3 
@@ -35,6 +35,9 @@
 
     var videoDefaults = {
         videoMaxWidth: '855px',
+
+        autoplayFirstVideo: true,
+
         youtubePlayerParams: false,
         vimeoPlayerParams: false,
         dailymotionPlayerParams: false,
@@ -67,15 +70,17 @@
                 if (_this.core.s.videojs) {
                     try {
                         videojs(_this.core.___slide[event.detail.index].querySelector('.lg-html5'), _this.core.s.videojsOptions, function () {
-                            if (!_this.videoLoaded) {
+                            if (!_this.videoLoaded && event.detail.index === _this.core.index && _this.core.s.autoplayFirstVideo) {
                                 this.play();
                             }
                         });
                     } catch (e) {
-                        console.error('Make sure you have included videojs');
+                        console.error('lightGallery:- Make sure you have included videojs');
                     }
                 } else {
-                    _this.core.___slide[event.detail.index].querySelector('.lg-html5').play();
+                    if (!_this.videoLoaded && event.detail.index === _this.core.index && _this.core.s.autoplayFirstVideo) {
+                        _this.core.___slide[event.detail.index].querySelector('.lg-html5').play();
+                    }
                 }
             }
         });
@@ -111,7 +116,7 @@
                                         this.play();
                                     });
                                 } catch (e) {
-                                    console.error('Make sure you have included videojs');
+                                    console.error('lightGallery:- Make sure you have included videojs');
                                 }
                             } else {
                                 _this.core.___slide[_this.core.index].querySelector('.lg-html5').play();
@@ -154,9 +159,11 @@
                         youtubePlayer.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
                     } else if (vimeoPlayer) {
                         try {
-                            $f(vimeoPlayer).api('play');
+                            new Vimeo.Player(vimeoPlayer).play().catch(function (error) {
+                                console.error('error playing the video:', error.name);
+                            });
                         } catch (e) {
-                            console.error('Make sure you have included froogaloop2 js');
+                            console.warn('lightGallery:- Make sure you have included https://github.com/vimeo/player.js');
                         }
                     } else if (dailymotionPlayer) {
                         dailymotionPlayer.contentWindow.postMessage('play', '*');
@@ -165,7 +172,7 @@
                             try {
                                 videojs(html5Player).play();
                             } catch (e) {
-                                console.error('Make sure you have included videojs');
+                                console.error('lightGallery:- Make sure you have included videojs');
                             }
                         } else {
                             html5Player.play();
@@ -208,9 +215,11 @@
                 youtubePlayer.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
             } else if (vimeoPlayer) {
                 try {
-                    $f(vimeoPlayer).api('pause');
+                    new Vimeo.Player(vimeoPlayer).pause().catch(function (error) {
+                        console.error('Unable to pause the video:', error.name);
+                    });
                 } catch (e) {
-                    console.error('Make sure you have included froogaloop2 js');
+                    console.warn('lightGallery:- Make sure you have included https://github.com/vimeo/player.js');
                 }
             } else if (dailymotionPlayer) {
                 dailymotionPlayer.contentWindow.postMessage('pause', '*');
@@ -219,7 +228,7 @@
                     try {
                         videojs(html5Player).pause();
                     } catch (e) {
-                        console.error('Make sure you have included videojs');
+                        console.error('lightGallery:- Make sure you have included videojs');
                     }
                 } else {
                     html5Player.pause();
@@ -260,7 +269,7 @@
             if (this.videoLoaded) {
                 autoplay = 0;
             } else {
-                autoplay = 1;
+                autoplay = this.core.s.autoplayFirstVideo ? 1 : 0;
             }
         }
 
@@ -287,15 +296,15 @@
                 a = a + '&' + utils.param(this.core.s.youtubePlayerParams);
             }
 
-            video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" ' + videoTitle + ' width="560" height="315" src="//www.youtube.com/embed/' + isVideo.youtube[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+            video = '<iframe allow="autoplay" class="lg-video-object lg-youtube ' + addClass + '" ' + videoTitle + ' width="560" height="315" src="//www.youtube.com/embed/' + isVideo.youtube[1] + a + '" frameborder="0" allowfullscreen></iframe>';
         } else if (isVideo.vimeo) {
 
-            a = '?autoplay=' + autoplay + '&api=1';
+            a = '?autoplay=' + autoplay;
             if (this.core.s.vimeoPlayerParams) {
                 a = a + '&' + utils.param(this.core.s.vimeoPlayerParams);
             }
 
-            video = '<iframe class="lg-video-object lg-vimeo ' + addClass + '" ' + videoTitle + ' width="560" height="315"  src="//player.vimeo.com/video/' + isVideo.vimeo[1] + a + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+            video = '<iframe allow="autoplay" class="lg-video-object lg-vimeo ' + addClass + '" ' + videoTitle + ' width="560" height="315"  src="//player.vimeo.com/video/' + isVideo.vimeo[1] + a + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
         } else if (isVideo.dailymotion) {
 
             a = '?wmode=opaque&autoplay=' + autoplay + '&api=postMessage';
@@ -303,7 +312,7 @@
                 a = a + '&' + utils.param(this.core.s.dailymotionPlayerParams);
             }
 
-            video = '<iframe class="lg-video-object lg-dailymotion ' + addClass + '" ' + videoTitle + ' width="560" height="315" src="//www.dailymotion.com/embed/video/' + isVideo.dailymotion[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+            video = '<iframe allow="autoplay" class="lg-video-object lg-dailymotion ' + addClass + '" ' + videoTitle + ' width="560" height="315" src="//www.dailymotion.com/embed/video/' + isVideo.dailymotion[1] + a + '" frameborder="0" allowfullscreen></iframe>';
         } else if (isVideo.html5) {
             var fL = html.substring(0, 1);
             if (fL === '.' || fL === '#') {
@@ -318,7 +327,7 @@
                 a = a + '&' + utils.param(this.core.s.vkPlayerParams);
             }
 
-            video = '<iframe class="lg-video-object lg-vk ' + addClass + '" ' + videoTitle + '  width="560" height="315" src="http://vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+            video = '<iframe allow="autoplay" class="lg-video-object lg-vk ' + addClass + '" ' + videoTitle + '  width="560" height="315" src="//vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
         }
 
         return video;
