@@ -32,7 +32,7 @@ Video.prototype.init = function() {
             if (_this.core.s.videojs) {
                 try {
                     videojs(_this.core.___slide[event.detail.index].querySelector('.lg-html5'), _this.core.s.videojsOptions, function() {
-                        if (!_this.videoLoaded) {
+                        if (!_this.videoLoaded && event.detail.index === _this.core.index) {
                             this.play();
                         }
                     });
@@ -40,7 +40,9 @@ Video.prototype.init = function() {
                     console.error('lightGallery:- Make sure you have included videojs');
                 }
             } else {
-                _this.core.___slide[event.detail.index].querySelector('.lg-html5').play();
+                if(event.detail.index === _this.core.index) {
+                    _this.core.___slide[event.detail.index].querySelector('.lg-html5').play();
+                }
             }
         }
     });
