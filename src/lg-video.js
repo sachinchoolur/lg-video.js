@@ -1,5 +1,8 @@
 var videoDefaults = {
     videoMaxWidth: '855px',
+
+    autoplayFirstVideo: true,
+
     youtubePlayerParams: false,
     vimeoPlayerParams: false,
     dailymotionPlayerParams: false,
@@ -32,7 +35,7 @@ Video.prototype.init = function() {
             if (_this.core.s.videojs) {
                 try {
                     videojs(_this.core.___slide[event.detail.index].querySelector('.lg-html5'), _this.core.s.videojsOptions, function() {
-                        if (!_this.videoLoaded && event.detail.index === _this.core.index) {
+                        if (!_this.videoLoaded && event.detail.index === _this.core.index && _this.core.s.autoplayFirstVideo) {
                             this.play();
                         }
                     });
@@ -40,7 +43,7 @@ Video.prototype.init = function() {
                     console.error('lightGallery:- Make sure you have included videojs');
                 }
             } else {
-                if(event.detail.index === _this.core.index) {
+                if(!_this.videoLoaded && event.detail.index === _this.core.index && _this.core.s.autoplayFirstVideo) {
                     _this.core.___slide[event.detail.index].querySelector('.lg-html5').play();
                 }
             }
@@ -240,7 +243,7 @@ Video.prototype.loadVideo = function(src, addClass, noposter, index, html) {
         if (this.videoLoaded) {
             autoplay = 0;
         } else {
-            autoplay = 1;
+            autoplay = this.core.s.autoplayFirstVideo ? 1 : 0;
         }
     }
 
