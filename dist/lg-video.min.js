@@ -1,5 +1,5 @@
 /**!
- * lg-video.js | 1.3.0-beta.0 | October 9th 2020
+ * lg-video.js | 1.3.0 | November 7th 2020
  * http://sachinchoolur.github.io/lg-video.js
  * Copyright (c) 2016 Sachin N; 
  * @license GPLv3 
